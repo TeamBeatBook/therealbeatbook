@@ -86,7 +86,7 @@ class NormalLoginForm extends React.Component {
       venueId,
       venue_website,
     }).then(() => {
-      message.success('Your EPK has been edited!');
+      message.success('Your venue details have been edited!');
     }).catch((err) => {
       console.error(err);
     });
