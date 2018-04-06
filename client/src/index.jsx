@@ -24,7 +24,7 @@ const Base = ({ store }) => (
         <Route exact path="/artistregister" component={ArtistRegister} />
         <Route exact path="/venueregister" component={VenueRegister} />
         <Route path="/artist/:username" component={EPKView} /* render={() => (actions.checkLoginStatus() === true ? (<Artist />) : <EPKView />)} */ />
-        <Route path="/password/recover/:email/:token" component={PasswordRecovery} />
+        <Route path="http://thebeatbook.com/password/recover/:email/:token" component={PasswordRecovery} />
       </Switch>
     </Router>
   </Provider>

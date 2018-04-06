@@ -272,9 +272,10 @@ class Requests extends React.Component {
           title={this.state.booking_title}
         >
           <em>{this.state.item.artist_name}</em>
-          <div>Requesting to play {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
-               from {`${moment(this.state.start_time).local().format('h:mm a')} `}
-               til {`${moment(this.state.end_time).local().format('h:mm a')}`}
+          <div>
+            Requesting to play {`${moment(this.state.start_time).format('MMMM Do YYYY')} `}
+            from {`${moment(this.state.start_time).local().format('h:mm a')} `}
+            til {`${moment(this.state.end_time).local().format('h:mm a')}`}
           </div>
         </Modal>
       </div>

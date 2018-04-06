@@ -104,8 +104,15 @@ class Artist extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            <img src={logo} style={{height: 20}} alt="" />
-            <div style={ {fontSize: 14,fontFamily: "'Baumans', cursive",color: 'black', display: 'inline-block',}}>beatbook</div>
+            <img src={logo} style={{ height: 20 }} alt="" />
+            <div style={{
+              fontSize: 14,
+              fontFamily: "'Baumans', cursive",
+              color: 'black',
+              display: 'inline-block',
+              }}
+            >beatbook
+            </div>
           </Footer>
         </Layout>
       </Layout>

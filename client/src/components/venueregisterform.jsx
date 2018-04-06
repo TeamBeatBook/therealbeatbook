@@ -10,7 +10,9 @@ const FormItem = Form.Item;
 class VenueRegisterForm extends React.Component {
   constructor(props) {
     super(props);
+    this.key = process.env.EMAILCHECKKEY;
   }
+
 
   registerVenue(e) {
     e.preventDefault();
