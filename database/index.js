@@ -107,6 +107,7 @@ const addBooking = async (info) => {
   });
 };
 
+
 const getVenueEmail = async (venueId) => {
   const userId = await knex.select('user_id').from('venues').where('venue_id', venueId);
   const venueEmail = await knex.select('email').from('users').where('user_id', userId[0].user_id);
@@ -185,8 +186,8 @@ const getEpk = async (artistId) => {
   return artist[0];
 };
 
-const getEpkData = async (artistName) => {
-  const artist = await knex.select('*').from('artists').where('artists.artist_name', artistName);
+const getEpkData = async (username) => {
+  const artist = await knex.select('*').from('artists').where('artists.artist_name', username);
   return artist[0];
 };
 
