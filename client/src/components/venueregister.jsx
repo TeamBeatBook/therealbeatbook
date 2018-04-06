@@ -30,7 +30,8 @@ class VenueRegister extends React.Component {
       state,
       capacity,
     }).then((res) => {
-      if (res.data === 'username already exists' || res.data === 'email already exists') {
+      console.log('response', res.data);
+      if (res.data === 'Username already exists' || res.data === 'Email already exists') {
         notification.open({ message: res.data });
       } else {
         this.actions.loadVenuePage(res.data);

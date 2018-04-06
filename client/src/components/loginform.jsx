@@ -19,8 +19,7 @@ class LoginForm extends React.Component {
     };
   }
 
-  componentDidMount() {
-  }
+
   submitLogin(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {

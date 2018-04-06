@@ -1,12 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const app = express();
 const path = require('path');
 const bcrypt = require('bcrypt');
 const db = require('../database/index.js');
 const passport = require('passport');
 const helpers = require('./helpers.js');//eslint-disable-line
+const app = express();
 require('../server/config/passport')(passport);
 
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -68,7 +67,7 @@ app.post('/register/artist', async (req, res) => {
   } if (registration === 'email already exists') {
     return res.send('email already exists');
   }
-  // helpers.sendEmail(req.body.username, req.body.email)
+  helpers.sendEmail(req.body.username, req.body.email);
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
     res.send(user);
@@ -79,11 +78,11 @@ app.post('/register/venue', async (req, res) => {
   const hash = bcrypt.hashSync(req.body.password, 10);
   const registration = await db.registerVenue(req.body.username, hash, req.body.email, req.body.venueName, req.body.address, req.body.city, req.body.state, req.body.capacity);//eslint-disable-line
   if (registration === 'username already exists') {
-    return res.send('username already exists');
+    return res.send('Username already exists');
   } if (registration === 'email already exists') {
-    return res.send('email already exists');
+    return res.send('Email already exists');
   }
-  // helpers.sendEmail(req.body.username, req.body.email)
+  helpers.sendEmail(req.body.username, req.body.email);
   const user = await db.getUser(req.body.username);
   req.login(user[0], () => {
     res.send(user);
