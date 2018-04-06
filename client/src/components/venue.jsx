@@ -29,7 +29,7 @@ class Venue extends React.Component {
 
   view() {
     const { bookings } = this.props.store;
-    const filteredBookings = bookings.filter(booking => booking.denied === 0);
+    const filteredBookings = bookings.length > 0 ? bookings.filter(booking => booking.denied === 0) : [];
     const { key } = this.state;
     if (key === '1') {
       return calendar(filteredBookings, true);
