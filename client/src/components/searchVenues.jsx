@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Input, Table, Divider, Modal } from 'antd';
 import * as actions from '../actions/index.js';
 import calendar from './calendar.jsx';
+import VenueDetailView from './venueDetailView.jsx';
 
 const { Search } = Input;
 
@@ -23,18 +24,16 @@ class SearchVenues extends React.Component {
         key: 'name',
         dataIndex: 'venue_name',
         sorter: (a, b) => (a.venue_name.toUpperCase() > b.venue_name.toUpperCase() ? -1 : 1),
-        width: '35%',
+        width: '200px',
       }, {
         title: 'Capacity',
         key: 'capacity',
         dataIndex: 'capacity',
         sorter: (a, b) => a.capacity - b.capacity,
-        width: '15%',
       }, {
         title: 'Address',
         key: 'address',
         dataIndex: 'venue_address',
-        width: '30%',
       }, {
         title: 'Calendar',
         key: 'calendar',
@@ -47,6 +46,21 @@ class SearchVenues extends React.Component {
               }}
             >
             View Venue Calendar
+            </a>
+          </span>
+        ),
+      }, {
+        title: 'More Details',
+        key: 'details',
+        render: (text, record) => (
+          <span>
+            <a
+              href="#"
+              onClick={() => {
+                this.viewDetails(record.venue_id);
+              }}
+            >
+            Details
             </a>
           </span>
         ),
@@ -69,6 +83,16 @@ class SearchVenues extends React.Component {
     });
   }
 
+  viewDetails(venue_id) {
+    Modal.info({
+      title: 'Venue Details',
+      content: <VenueDetailView venueId={venue_id} />,
+      okText: 'Close',
+      width: 600,
+      maskClosable: true,
+    });
+  }
+
   viewCalendar(id, venueName) {
     const { artistId } = this.props.store;
     axios.get('/venueCalendar', {
@@ -77,10 +101,10 @@ class SearchVenues extends React.Component {
       },
     }).then((res) => {
       this.setState({
-        venueBookings: res.data,
+        venueBookings: res.data.filter(booking => booking.denied === 0 && booking.confirmed === 1),
       });
       Modal.info({
-        title: 'Venue Calendar',
+        title: `${venueName}'s Calendar`,
         content: calendar(this.state.venueBookings, true, artistId, id, this.state.saveToStore, venueName),
         width: 800,
         okText: 'Close',

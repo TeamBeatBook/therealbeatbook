@@ -13,9 +13,14 @@ class Home extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.actions.isLoggedIn();
+  }
+
+
   render() {
     return (
-      <div >
+      <div className="loginpage">
         {!this.props.store.landingViewed &&
           <LandingPage />
         }

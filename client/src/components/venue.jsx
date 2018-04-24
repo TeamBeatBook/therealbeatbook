@@ -6,6 +6,8 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import * as actions from '../actions/index.js';
 import calendar from './calendar.jsx';
 import Requests from './requests.jsx';
+import VenueDetails from './venueDetails.jsx';
+import logo from '../../../beatbooklogo.png';
 
 const { Header, Content, Footer, Sider } = Layout;//eslint-disable-line
 
@@ -27,20 +29,17 @@ class Venue extends React.Component {
 
   view() {
     const { bookings } = this.props.store;
+    const filteredBookings = bookings.length > 0 ? bookings.filter(booking => booking.denied === 0) : [];
     const { key } = this.state;
     if (key === '1') {
-      return calendar(bookings, true);
+      return calendar(filteredBookings, true);
     }
     if (key === '2') {
-      return (<div>Find Artist</div>);
-    }
-    if (key === '3') {
       return (<Requests />);
     }
-  }
-
-  logout() {
-    this.props.actions.logout();
+    if (key === '3') {
+      return (<VenueDetails venueId={this.props.store.venueId} />);
+    }
   }
 
   render() {
@@ -48,18 +47,23 @@ class Venue extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onSelect={info => this.onSelect(info)} >
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={['1']}
+            mode="inline"
+            onSelect={info => this.onSelect(info)}
+          >
             <Menu.Item key="1">
               <Icon type="calendar" />
               <span>Calendar</span>
             </Menu.Item>
             <Menu.Item key="2">
-              <Icon type="search" />
-              <span>Find Artist</span>
-            </Menu.Item>
-            <Menu.Item key="3">
               <Icon type="book" />
               <span>Booking Requests</span>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Icon type="profile" />
+              <span>Venue Details</span>
             </Menu.Item>
             <Menu.Item key="4">
               <Icon type="logout" />
@@ -77,7 +81,15 @@ class Venue extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-          Ruber Ducky Dynasty!
+            <img src={logo} style={{ height: 20 }} alt="" />
+            <div style={{
+              fontSize: 14,
+              fontFamily: "'Baumans', cursive",
+              color: 'black',
+              display: 'inline-block',
+              }}
+            >beatbook
+            </div>
           </Footer>
         </Layout>
       </Layout>

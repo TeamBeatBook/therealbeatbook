@@ -8,9 +8,10 @@ import Requests from './requests.jsx';
 import SearchVenues from './searchVenues.jsx';
 import EPKEdit from './epkEdit.jsx';
 import EPKView from './epkView.jsx';
+import logo from '../../../beatbooklogo.png';
 
-const {Content, Footer, Sider} = Layout /* eslint-disable-line */;
-const SubMenu = Menu.SubMenu /* eslint-disable-line */;
+const { Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 class Artist extends React.Component {
   constructor(props) {
@@ -28,11 +29,14 @@ class Artist extends React.Component {
     }
   }
 
-  view() {/* eslint-disable-line */
+  view() {
     const { key } = this.state;
     const artist = this.props.store.artistId;
+    const artist2 = parseInt(artist.toString()); /* eslint-disable-line */
+    const { bookings } = this.props.store;
+    const filteredBookings = bookings.length > 0 ? bookings.filter(booking => booking.denied !== 1) : [];
     if (key === '1') {
-      return calendar(this.props.store.bookings, true);
+      return calendar(filteredBookings, true, artist2, null, this.props.actions.addBooking);
     }
     if (key === '2') {
       return (<SearchVenues />);
@@ -47,7 +51,6 @@ class Artist extends React.Component {
       return (<EPKEdit artistID={artist} />);
     }
   }
-
 
   render() {
     return (
@@ -64,17 +67,14 @@ class Artist extends React.Component {
               <Icon type="calendar" />
               <span>Calendar</span>
             </Menu.Item>
-
             <Menu.Item key="2">
               <Icon type="search" />
               <span>Find Venue</span>
             </Menu.Item>
-
             <Menu.Item key="3">
               <Icon type="folder" />
               <span>My Requests</span>
             </Menu.Item>
-
             <SubMenu
               key="sub1"
               title={<span>
@@ -104,7 +104,15 @@ class Artist extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-          Rubber Ducky Dynasty!
+            <img src={logo} style={{ height: 20 }} alt="" />
+            <div style={{
+              fontSize: 14,
+              fontFamily: "'Baumans', cursive",
+              color: 'black',
+              display: 'inline-block',
+              }}
+            >beatbook
+            </div>
           </Footer>
         </Layout>
       </Layout>

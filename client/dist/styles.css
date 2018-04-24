@@ -4,23 +4,7 @@
   
 }
 
-.landingpage {
-  background-color: blue;
-  background: linear-gradient(50deg, rgba(217, 161, 88, 0.92), rgba(171, 35, 53, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
-}
-
-/* body {
-    background-color: #fafafa;
-}  */
-
-/* body {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(50deg, rgba(88, 128, 217, 0.92), rgba(124, 35, 171, 0.92)), url(/media/bg.jpg);
-  background-size: cover;
-} */
-
-/* favorite */
+/* favorite orange-red theme */
 /* body {
   width: 100%;
   height: 100%;
@@ -28,34 +12,22 @@
   background-size: cover;
 } */
 
+/* 2nd favorite purple-blue theme */
 /* body {
   width: 100%;
   height: 100%;
-  background: linear-gradient(50deg, rgba(217, 161, 88, 0.92), rgba(171, 55, 35, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
+  background-image: linear-gradient(50deg, rgba(79, 5, 170, 0.82), rgba(0, 40, 107, 0.82)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
   background-size: cover;
 } */
-
- /* body {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(50deg, rgba(217, 172, 88, 0.92), rgba(171, 35, 53, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
-  background-size: cover;
-}  */
 
 body {
   width: 100%;
   height: 100%;
-  background: linear-gradient(50deg, rgba(79, 5, 170, 0.82), rgba(0, 40, 107, 0.82)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
+  background-image: url(http://blog.creativelive.com/wp-content/uploads/2016/01/lights-night-unsharp-blured.jpg?utm_source=creativeLIVE&utm_medium=blog&utm_campaign=photo-video_bokeh-effect-tutorial&utm_content=text_link);
   background-size: cover;
-} 
+}
 
 
-/* body {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(50deg, rgba(204, 217, 88, 0.92), rgba(171, 67, 35, 0.92)), url(http://www.andpop.com/wp-content/uploads/2016/03/thenextweb.jpg);
-  background-size: cover;
-} */
 
  .login-form {
     max-width: 300px;
@@ -78,14 +50,36 @@ body {
     float: 'right'
   }
 
-  
-  .ant-carousel .slick-slide {
-    text-align: center;
-    height: 650px;
-    line-height: 160px;
-    overflow: hidden;
-  }
-  
-  .ant-carousel .slick-slide h3 {
-    color: #fff;
-  }
+.manik input {
+  background-color: rgba(255,255,255,0.35);
+  border-radius: 25px;
+  color: white;
+  border-color: Transparent;
+  font-size: 17px;
+  position: absolute;
+  top: 5%;
+  left:  5%
+}
+
+
+.registerinput input {
+  background-color: rgba(255,255,255,0.35);
+  border-radius: 25px;
+  color: white;
+  border-color: Transparent;
+  font-size: 17px;
+}
+
+.logininput input {
+  background-color: rgba(255,255,255,0.35);
+  border-radius: 25px;
+  color: white;
+  border-color: Transparent;
+  font-size: 17px;
+}
+
+
+
+
+
+

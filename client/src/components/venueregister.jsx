@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { Form, Icon } from 'antd';
+import { Form, notification, Icon } from 'antd';
 import * as actions from '../actions/index.js';
 import VenueRegisterForm from './venueregisterform.jsx';
 
@@ -15,7 +15,7 @@ class VenueRegister extends React.Component {
     super(props);
   }
 
-  goHome() {
+  goBackToLogin() {
     this.props.history.replace('/');
   }
 
@@ -30,9 +30,14 @@ class VenueRegister extends React.Component {
       state,
       capacity,
     }).then((res) => {
-      this.actions.loadVenuePage(res.data);
-      this.actions.setVenue(res.data[1].artist_id);
-      this.history.replace('/');
+      console.log('response', res.data);
+      if (res.data === 'Username already exists' || res.data === 'Email already exists') {
+        notification.open({ message: res.data });
+      } else {
+        this.actions.loadVenuePage(res.data);
+        this.actions.setVenue(res.data[1].artist_id);
+        this.history.replace('/');
+      }
     }).catch((err) => {
       console.error('error', err);
     });
@@ -40,15 +45,18 @@ class VenueRegister extends React.Component {
 
   render() {
     return (
-      <div style={styles.registerbox}>
-        <img src={logo} style={styles.logo} alt="" />
-        <div style={styles.beatbook}>beatbook</div>
-        <div style={styles.divider} />
-        <div style={styles.registerform}>
-          <VenueRegisterFormContainer registerVenue={this.registerVenue} />
+      <div>
+        <a style={styles.goBack} onClick={() => this.goBackToLogin()}>
+          <Icon type="arrow-left" style={styles.backArrow} />
+          <div style={styles.backText}>Back to Login</div>
+        </a>
+        <div style={styles.registerbox}>
+          <img src={logo} style={styles.logo} alt="" />
+          <div style={styles.registerform}>
+            <VenueRegisterFormContainer registerVenue={this.registerVenue} />
+          </div>
         </div>
-        <Icon style={styles.goback} type="left" onClick={() => this.goHome()} />
-      </div >
+      </div>
     );
   }
 }
@@ -65,47 +73,43 @@ export default connect(mapStateToProps, mapDispatchToProps)(VenueRegister);
 
 const styles = {
   logo: {
-    height: 20,
-    width: 20,
-    display: 'inline-block',
+    filter: 'invert(1)',
+    height: 75,
+    width: 75,
+    position: 'relative',
+    marginBottom: 20,
   },
-  beatbook: {
-    fontSize: 20,
-    fontFamily: 'system-ui',
-    marginTop: '5%',
-    display: 'inline-block',
-  },
-  loginbutton: {
-    textAlign: 'center',
+  registerform: {
+    position: 'relative',
+    width: '50%',
+    left: '25%',
   },
   registerbox: {
-    backgroundColor: 'white',
+    backgroundColor: 'Transparent',
     position: 'absolute',
     borderStyle: 'solid',
     borderWidth: 0.5,
-    borderColor: '#e6e6e6',
-    width: '25%',
-    height: '75%',
-    left: '37.5%',
-    top: '12.5%',
+    borderColor: 'Transparent',
+    width: '50%',
+    height: '90%',
+    left: '25%',
+    top: '5%',
     textAlign: 'center',
-    overflow: 'auto',
   },
-  registerform: {
-    marginLeft: 50,
-    marginRight: 50,
+  backArrow: {
+    fontSize: 20,
+    color: 'white',
+    display: 'inline-block',
   },
-  divider: {
-    borderStyle: 'solid',
-    borderWidth: 0.5,
-    borderColor: '#e6e6e6',
-    marginLeft: 25,
-    marginRight: 25,
-    marginTop: 50,
-    marginBottom: 50,
+  backText: {
+    fontSize: 15,
+    display: 'inline-block',
+    color: 'white',
+    font: 'Roboto',
   },
-  goback: {
-    fontSize: 25,
-    marginTop: 0,
+  goBack: {
+    position: 'absolute',
+    top: '2%',
+    left: '2%',
   },
 };

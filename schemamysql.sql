@@ -33,7 +33,9 @@ CREATE TABLE venues
   venue_city VARCHAR(25),
   venue_state VARCHAR(25),
   venue_address VARCHAR (25),
+  venue_stage VARCHAR(1000) DEFAULT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  venue_website VARCHAR(50),
   PRIMARY KEY (venue_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
@@ -48,6 +50,16 @@ CREATE TABLE artists
   artist_city VARCHAR(25),
   artist_state VARCHAR(25),
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  imageUrl LONGBLOB,
+  artist_facebook VARCHAR(50),
+  artist_twitter VARCHAR(50),
+  artist_instagram VARCHAR(50),
+  artist_support VARCHAR(8000),
+  artist_contact VARCHAR(100),
+  artist_youtube VARCHAR(100),
+  artist_spotify VARCHAR(100),
+  artist_contactEmail VARCHAR(40),
+  artist_website VARCHAR(50),
   PRIMARY KEY (artist_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
@@ -55,13 +67,14 @@ CREATE TABLE artists
 CREATE TABLE bookings
 (
   booking_id INT NOT NULL AUTO_INCREMENT,
-  artist_id INT NOT NULL,
-  venue_id INT NOT NULL,
+  artist_id INT DEFAULT 0,
+  venue_id INT DEFAULT 0,
   booking_title VARCHAR(50),
-  start_time DATETIME,
-  end_time DATETIME,
+  start_time VARCHAR(50),
+  end_time VARCHAR(50),
   booking_description VARCHAR(8000),
   confirmed boolean DEFAULT FALSE,
+  denied boolean DEFAULT FALSE,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (booking_id),
   FOREIGN KEY (artist_id) REFERENCES artists (artist_id),

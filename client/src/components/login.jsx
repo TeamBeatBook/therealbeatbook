@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Form } from 'antd';
+import { Form, notification, Icon } from 'antd';
 import * as actions from '../actions/index.js';
 import LoginForm from './loginform.jsx';
 import logo from '../../../beatbooklogo.png';
@@ -11,22 +11,37 @@ const LoginFormContainer = Form.create()(LoginForm); // component for antd login
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
+  }
+
+  submitLogin(username, password) {
+    this.actions.submitLogin(username, password, (badResults) => {
+      notification.open({ message: badResults });
+    });
+  }
+
+  goBackToHome() {
+    this.props.actions.loadHomePage();
   }
 
   render() {
     return (
-      <div style={styles.loginbox}>
-        <img src={logo} style={styles.logo} alt="" />
-        <div style={styles.beatbook}>beatbook</div>
-        <div style={styles.divider} />
-        <div style={styles.loginform}>
-          <LoginFormContainer />
+      <div>
+        <a style={styles.goBack} onClick={() => this.goBackToHome()}>
+          <Icon type="arrow-left" style={styles.backArrow} />
+          <div style={styles.backText}>Back to Home</div>
+        </a>
+        <div style={styles.loginbox} >
+          <img src={logo} style={styles.logo} alt="" />
+          <div style={styles.loginform}>
+            <LoginFormContainer submitLogin={this.submitLogin} />
+          </div>
         </div>
-        <div className="fb-login-button" data-size="medium" data-auto-logout-link="true">facebook login</div>
       </div>
     );
   }
 }
+
 
 const mapStateToProps = state => (
   { store: state }
@@ -38,48 +53,49 @@ const mapDispatchToProps = dispatch => (
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
+
 const styles = {
   logo: {
-    height: 20,
-    width: 20,
-    display: 'inline-block',
-
+    filter: 'invert(1)',
+    height: 75,
+    width: 75,
+    position: 'relative',
+    marginBottom: 20,
   },
-  beatbook: {
-    fontSize: 20,
-    fontFamily: 'system-ui',
-    marginTop: '5%',
-    display: 'inline-block',
-  },
-  loginbutton: {
-    textAlign: 'center',
+  loginform: {
+    position: 'relative',
+    width: '50%',
+    left: '25%',
   },
   loginbox: {
-    backgroundColor: 'white',
+    backgroundColor: 'Transparent',
     position: 'absolute',
     borderStyle: 'solid',
     borderWidth: 0.5,
-    borderColor: '#e6e6e6',
-    width: '25%',
-    height: '75%',
-    left: '37.5%',
-    top: '12.5%',
+    borderColor: 'Transparent',
+    width: '50%',
+    height: '90%',
+    left: '25%',
+    top: '5%',
     textAlign: 'center',
-    overflow: 'auto',
   },
-  loginform: {
-    marginLeft: 50,
-    marginRight: 50,
-
+  log: {
+    display: 'inline-block',
   },
-  divider: {
-    borderStyle: 'solid',
-    borderWidth: 0.5,
-    borderColor: '#e6e6e6',
-    marginLeft: 25,
-    marginRight: 25,
-    marginTop: 50,
-    marginBottom: 50,
+  backArrow: {
+    fontSize: 20,
+    color: 'white',
+    display: 'inline-block',
+  },
+  backText: {
+    fontSize: 15,
+    display: 'inline-block',
+    color: 'white',
+    font: 'Roboto',
+  },
+  goBack: {
+    position: 'absolute',
+    top: '2%',
+    left: '2%',
   },
 };
-
