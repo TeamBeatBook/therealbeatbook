@@ -1,5 +1,5 @@
-# react-starter
-Simple Boilerplate for React Project
+# The BeatBook
+Welcome to The BeatBook repository. If you'd like to build on top of this application please follow the steps below.
 
 ## To start the app
 
