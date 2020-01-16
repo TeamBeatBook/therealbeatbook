@@ -55,6 +55,7 @@ class LandingPageBeta extends React.Component {
               <iframe
                 title="gif"
                 src="https://giphy.com/embed/5hdkKLAW3IXgMAsJKS"
+                //REPLACE THESE GIFFFFFFS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 width="480"
                 height="293"
                 frameBorder="0"
@@ -68,6 +69,7 @@ class LandingPageBeta extends React.Component {
               <iframe
                 title="gif"
                 src="https://giphy.com/embed/C9EhnuQwh17tld9hBx"
+                //these giphs need to be replaced!!!!!!!!
                 width="480"
                 height="293"
                 frameBorder="0"
@@ -98,6 +100,7 @@ class LandingPageBeta extends React.Component {
               <iframe
                 title="gif"
                 src="https://giphy.com/embed/5q27K704y6JsG3zHRF"
+                //REPLACE THESE GIFFFFFFFFFS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 width="480"
                 height="293"
                 frameBorder="0"
